@@ -26,7 +26,7 @@ export default {
   name: "HomeView",
   components: { CoinList },
   data() {
-    return;
+    return{};
   },
 };
 </script>

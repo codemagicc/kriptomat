@@ -1,5 +1,5 @@
 <template>
-  <v-list-item @click="goTodetail(favourite.id)">
+  <v-list-item :to="`/coin/${favourite.id}`" style="background-color: #fbfbfb; border: none;">
     <v-list-item-avatar>
       <v-img class="elevation-6" alt="" :src="favourite.image"></v-img>
     </v-list-item-avatar>
@@ -52,9 +52,6 @@ export default {
       if (price_change_percentage_24h > 0) return "#0DEAA9";
       else if (price_change_percentage_24h < 0) return "#FF9696";
       else return "#0DEAA9";
-    },
-    goTodetail(id) {
-      this.$router.push({ name: "coin", params: { id: id } });
     },
   },
   created() {},

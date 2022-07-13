@@ -18,7 +18,7 @@
       :search="search"
     >
       <template v-slot:[`item.price_change_percentage_24h`]="{ item }">
-        <v-title
+        <div
           :style="{ color: getColor(item.price_change_percentage_24h) }"
           style="display: flex; align-items: center"
           dark
@@ -38,10 +38,10 @@
                 : -item.price_change_percentage_24h.toFixed(2)
             }}%</span
           >
-        </v-title>
+        </div>
       </template>
       <template v-slot:[`item.name`]="{ item }">
-        <v-list-item>
+        <v-list-item :to="`/coin/${item.id}`">
           <v-list-item-avatar>
             <v-img class="elevation-6" alt="" :src="item.image"></v-img>
           </v-list-item-avatar>
@@ -54,20 +54,32 @@
         </v-list-item>
       </template>
       <template v-slot:[`item.current_price`]="{ item }">
-        <v-title
+        <div
           style="display: flex; align-items: center"
           class="font-weight-bold"
         >
           <v-icon x-small>fa-solid fa-euro-sign</v-icon>
           {{ item.current_price.toFixed(2) }}
-        </v-title>
+        </div>
       </template>
       <template v-slot:[`item.id`]="{ item }">
-        <v-button v-on:click="setfavourite(item.id)">
+        <div v-on:click="setfavourite(item.id)">
           <v-icon :color="item.favourite ? 'orange' : ''"
             >fa-solid fa-star</v-icon
           >
-        </v-button>
+        </div>
+      </template>
+      <template slot="headerCell" slot-scope="props">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <span v-on="on">
+              {{ props.header.text }}
+            </span>
+          </template>
+          <span>
+            {{ props.header.text }};
+          </span>
+        </v-tooltip>
       </template>
     </v-data-table>
   </v-card>
@@ -119,7 +131,6 @@ export default {
         );
         this.coinList = response.data;
         this.getfavouriteStar();
-        console.log(this.coinList);
       } catch (error) {
         console.log(error);
       }
