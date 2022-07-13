@@ -1,5 +1,5 @@
 <template>
-  <CoinList />
+  <div></div>
 </template>
 
 <style scoped>
@@ -21,10 +21,10 @@
 }
 </style>
 <script>
-import CoinList from "@/components/CoinList.vue";
+// import CoinList from "@/components/CoinList.vue";
 export default {
-  name: "HomeView",
-  components: { CoinList },
+  name: "SingleCoin",
+  components: {},
   data() {
     return;
   },

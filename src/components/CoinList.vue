@@ -34,8 +34,8 @@
           <span>
             {{
               item.price_change_percentage_24h >= 0
-                ? item.price_change_percentage_24h
-                : -item.price_change_percentage_24h
+                ? item.price_change_percentage_24h.toFixed(2)
+                : -item.price_change_percentage_24h.toFixed(2)
             }}%</span
           >
         </v-title>
@@ -115,7 +115,7 @@ export default {
     async getData() {
       try {
         const response = await this.$http.get(
-          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h"
+          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h"
         );
         this.coinList = response.data;
         this.getfavouriteStar();
@@ -137,7 +137,7 @@ export default {
         newList.push(item);
       });
       this.coinList = newList;
-      store.dispatch("addToCoinList", newList);
+      store.dispatch("addToFavouriteList", newList);
     },
     setfavourite(id) {
       var existing = JSON.parse(localStorage.getItem("myfavourite") || "[]");
@@ -163,7 +163,7 @@ export default {
     },
   },
 
-  created() {
+  mounted() {
     this.getData();
   },
 };

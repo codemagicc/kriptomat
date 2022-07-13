@@ -5,7 +5,7 @@
     >
     <v-card-body>
       <v-card class="mx-auto" min-width="auto">
-        <div v-for="favourite in $store.state.favouriteList" :key="favourite">
+        <div v-for="favourite in $store.getters.favouriteList" :key="favourite">
           <FavouriteItem :favourite="favourite" />
         </div>
       </v-card>

@@ -9,6 +9,8 @@ export default new Vuex.Store({
     coinList: null
   },
   getters: {
+    favouriteList: s => s.favouriteList,
+    coinList: s => s.coinList,
   },
   mutations: {
     UPDATE_FAVORITES(state, payload) {
@@ -20,6 +22,9 @@ export default new Vuex.Store({
   },
   actions: {
     addToCoinList(context, payload) {
+      context.commit('UPDATE_COINLIST', payload)
+    },
+    addToFavouriteList(context, payload) {
       var newList = [];
       payload.forEach(function (item) {
         if (item.favourite == true) {
